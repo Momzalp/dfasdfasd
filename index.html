@@ -1,54 +1,99 @@
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mi Tienda de Ropa</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Comprar Polo</title>
+<link rel="stylesheet" href="style.css" />
 </head>
-<body style="font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9;">
+<body>
 
-  <h1 style="text-align: center; color: #333;">Mi Tienda de Ropa</h1>
+<header>
+  <h1>Tienda de Polos y Ropa</h1>
+</header>
 
-  <div style="display: flex; gap: 30px; justify-content: center; flex-wrap: wrap;">
+<main>
 
-    <!-- Producto 1: Polo Clásico -->
-    <div style="border: 1px solid #ddd; border-radius: 10px; padding: 20px; background-color: #fff; width: 280px; text-align: center;">
-      <h2>Polo Clásico</h2>
-      <img src="https://i.postimg.cc/qv2QtshG/photo-5017235428180341073-y.jpg" alt="Polo Clásico" width="200" />
-      <p style="margin: 10px 0;">Precio: <strong>S/150</strong></p>
-      <a href="https://mpago.la/2gyiYbw" target="_blank">
-        <button style="padding: 10px 20px; background-color: #009ee3; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer;">
-          Comprar ahora
-        </button>
-      </a>
+  <section id="productos">
+    <h2>Productos</h2>
+    <div class="producto">
+      <img src="https://i.postimg.cc/qv2QtshG/photo-5017235428180341073-y.jpg" alt="Polo Clásico" />
+      <h3>Polo Clásico</h3>
+      <p>S/ 150</p>
+      <button onclick="comprarProducto(1)">Comprar</button>
     </div>
-
-    <!-- Producto 2: Polera -->
-    <div style="border: 1px solid #ddd; border-radius: 10px; padding: 20px; background-color: #fff; width: 280px; text-align: center;">
-      <h2>Polera Premium</h2>
-      <img src="https://via.placeholder.com/200x200?text=Polera" alt="Polera Premium" width="200" />
-      <p style="margin: 10px 0;">Precio: <strong>S/250</strong></p>
-      <a href="https://mpago.la/1q6W4md" target="_blank">
-        <button style="padding: 10px 20px; background-color: #009ee3; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer;">
-          Comprar ahora
-        </button>
-      </a>
+    <div class="producto">
+      <img src="https://i.postimg.cc/qv2QtshG/photo-5017235428180341073-y.jpg" alt="Polera Premium" />
+      <h3>Polera Premium</h3>
+      <p>S/ 250</p>
+      <button onclick="comprarProducto(2)">Comprar</button>
     </div>
-
-    <!-- Producto 3: Medias -->
-    <div style="border: 1px solid #ddd; border-radius: 10px; padding: 20px; background-color: #fff; width: 280px; text-align: center;">
-      <h2>Par de Medias</h2>
-      <img src="https://via.placeholder.com/200x200?text=Medias" alt="Medias" width="200" />
-      <p style="margin: 10px 0;">Precio: <strong>S/50</strong></p>
-      <a href="https://mpago.la/1ZxSSk3" target="_blank">
-        <button style="padding: 10px 20px; background-color: #009ee3; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer;">
-          Comprar ahora
-        </button>
-      </a>
+    <div class="producto">
+      <img src="https://i.postimg.cc/qv2QtshG/photo-5017235428180341073-y.jpg" alt="Par de Medias" />
+      <h3>Par de Medias</h3>
+      <p>S/ 50</p>
+      <button onclick="comprarProducto(3)">Comprar</button>
     </div>
+  </section>
 
-  </div>
+  <section id="formulario-compra" style="display:none;">
+    <h2>Datos para la compra</h2>
+    <form id="form-compra" onsubmit="return enviarFormulario(event)">
+      <p id="producto-seleccionado"></p>
+
+      <label>
+        Nombres completos:<br />
+        <input type="text" name="nombre" required />
+      </label><br /><br />
+
+      <label>
+        DNI:<br />
+        <input type="text" name="dni" required pattern="\\d{8}" title="8 dígitos" />
+      </label><br /><br />
+
+      <label>
+        Número de celular:<br />
+        <input type="tel" name="telefono" required pattern="\\d{9}" title="9 dígitos" />
+      </label><br /><br />
+
+      <label>
+        Correo electrónico:<br />
+        <input type="email" name="email" required />
+      </label><br /><br />
+
+      <label>
+        Lugar de entrega:<br />
+        <select name="lugar" required>
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option value="Lima">Lima</option>
+          <option value="Arequipa">Arequipa</option>
+          <option value="Cusco">Cusco</option>
+          <option value="Trujillo">Trujillo</option>
+        </select>
+      </label><br /><br />
+
+      <label>
+        Agencia de envío:<br />
+        <select name="agencia" required>
+          <option value="" disabled selected>Selecciona una agencia</option>
+          <option value="Shalom">Shalom</option>
+          <option value="Cruz del Sur">Cruz del Sur</option>
+          <option value="Emtrafesa">Emtrafesa</option>
+        </select>
+      </label><br /><br />
+
+      <label>
+        Cantidad:<br />
+        <input type="number" id="cantidad" name="cantidad" value="1" min="1" required />
+      </label><br /><br />
+
+      <button type="submit">Enviar y Pagar</button>
+    </form>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
 
 </body>
 </html>
