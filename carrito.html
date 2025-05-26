@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carrito - Tienda de Polos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">Mi Tienda de Polos</h1>
+      <nav class="nav">
+        <a href="index.html">Inicio</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="carrito.html">Carrito</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <h2>Tu Carrito</h2>
+    <ul id="lista-carrito" class="lista-carrito"></ul>
+    <p id="total" class="total"></p>
+    <a href="checkout.html" class="btn-primary" id="btn-pagar" style="display:none;">Proceder al Pago</a>
+  </main>
+
+  <script src="carrito.js"></script>
+</body>
+</html>

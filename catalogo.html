@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catálogo - Tienda de Polos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">Mi Tienda de Polos</h1>
+      <nav class="nav">
+        <a href="index.html">Inicio</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="carrito.html">Carrito</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <h2>Catálogo de Productos</h2>
+    <div class="productos-grid">
+      <div class="producto-card">
+        <img src="https://via.placeholder.com/300x300.png?text=Polo+Blanco" alt="Polo Blanco Oversize" />
+        <h3>Polo Blanco Oversize</h3>
+        <p class="precio">S/49.90</p>
+        <button class="btn-primary" onclick="agregarAlCarrito('Polo Blanco Oversize', 49.90)">Agregar al carrito</button>
+      </div>
+
+      <div class="producto-card">
+        <img src="https://via.placeholder.com/300x300.png?text=Polo+Negro" alt="Polo Negro Clásico" />
+        <h3>Polo Negro Clásico</h3>
+        <p class="precio">S/59.90</p>
+        <button class="btn-primary" onclick="agregarAlCarrito('Polo Negro Clásico', 59.90)">Agregar al carrito</button>
+      </div>
+
+      <div class="producto-card">
+        <img src="https://via.placeholder.com/300x300.png?text=Polo+Azul" alt="Polo Azul Marino" />
+        <h3>Polo Azul Marino</h3>
+        <p class="precio">S/54.90</p>
+        <button class="btn-primary" onclick="agregarAlCarrito('Polo Azul Marino', 54.90)">Agregar al carrito</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="carrito.js"></script>
+</body>
+</html>
