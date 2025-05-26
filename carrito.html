@@ -17,26 +17,13 @@
   </header>
 
   <main>
-    <table id="carrito-tabla">
-      <thead>
-        <tr>
-          <th>Producto</th>
-          <th>Precio Unitario (S/)</th>
-          <th>Cantidad</th>
-          <th>Subtotal (S/)</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="carrito-cuerpo">
-        <!-- Aquí se agregarán los productos -->
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="3" style="text-align:right"><strong>Total:</strong></td>
-          <td id="total" colspan="2">0.00</td>
-        </tr>
-      </tfoot>
-    </table>
+    <div id="carrito-container">
+      <!-- Productos del carrito se inyectan aquí -->
+    </div>
+
+    <div id="carrito-total">
+      <strong>Total: S/ <span id="total">0.00</span></strong>
+    </div>
 
     <button id="pagar-btn">Pagar</button>
   </main>
