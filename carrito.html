@@ -1,24 +1,44 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Carrito</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <title>Carrito de Compras</title>
+  <link rel="stylesheet" href="styles.css" />
   <script src="script.js" defer></script>
 </head>
 <body>
   <header>
-    <h1>Tu Carrito</h1>
+    <h1>Carrito de Compras</h1>
     <nav>
       <a href="index.html">Inicio</a>
       <a href="catalogo.html">Catálogo</a>
       <a href="carrito.html">Carrito</a>
     </nav>
   </header>
+
   <main>
-    <ul id="carrito-lista"></ul>
-    <p>Total: S/ <span id="total">0.00</span></p>
-    <button onclick="realizarPago()">Proceder al Pago</button>
+    <table id="carrito-tabla">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Precio Unitario (S/)</th>
+          <th>Cantidad</th>
+          <th>Subtotal (S/)</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="carrito-cuerpo">
+        <!-- Aquí se agregarán los productos -->
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" style="text-align:right"><strong>Total:</strong></td>
+          <td id="total" colspan="2">0.00</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <button id="pagar-btn">Pagar</button>
   </main>
 </body>
 </html>
