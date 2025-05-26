@@ -98,7 +98,7 @@ main {
 
 .producto-info button {
   margin-top: auto;
-  padding: 10px 15px;
+  padding: 12px 18px;
   border: none;
   background-color: #0077cc;
   color: white;
@@ -106,6 +106,7 @@ main {
   cursor: pointer;
   border-radius: 8px;
   transition: background-color 0.3s ease;
+  font-size: 1rem;
 }
 
 .producto-info button:hover {
@@ -155,33 +156,43 @@ main {
 }
 
 .cantidad-control button {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   border: none;
   background-color: #0077cc;
   color: white;
   border-radius: 5px;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   cursor: pointer;
   font-weight: bold;
   line-height: 1;
   transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cantidad-control button:hover {
   background-color: #005fa3;
 }
 
+.cantidad-control span {
+  font-size: 1.2rem;
+  min-width: 25px;
+  text-align: center;
+}
+
 .eliminar-btn {
   background-color: #dc3545;
   color: white;
   border: none;
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
   margin-top: 0.5rem;
   transition: background-color 0.3s ease;
+  font-size: 1rem;
 }
 
 .eliminar-btn:hover {
@@ -202,7 +213,7 @@ main {
   background-color: #28a745;
   color: white;
   border: none;
-  padding: 12px 30px;
+  padding: 14px 36px;
   font-size: 1.3rem;
   border-radius: 8px;
   cursor: pointer;
