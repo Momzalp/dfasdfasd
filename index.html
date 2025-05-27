@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,47 +9,20 @@
 </head>
 <body>
   <header>
-    <h1>Tienda de Ropa</h1>
+    <h1>Tienda de Productos</h1>
   </header>
-
-  <main>
-    <section id="productos" class="producto-container">
-      <div class="producto">
-        <h2>Polo Clásico</h2>
-        <img src="https://i.postimg.cc/qv2QtshG/photo-5017235428180341073-y.jpg" alt="Polo Clásico" />
-        <p>Precio: S/ 150</p>
-        <button onclick="comprarProducto(1)">Comprar</button>
-      </div>
-      <div class="producto">
-        <h2>Polera Premium</h2>
-        <img src="https://via.placeholder.com/300x200?text=Polera" alt="Polera" />
-        <p>Precio: S/ 250</p>
-        <button onclick="comprarProducto(2)">Comprar</button>
-      </div>
-      <div class="producto">
-        <h2>Par de Medias</h2>
-        <img src="https://via.placeholder.com/300x200?text=Medias" alt="Medias" />
-        <p>Precio: S/ 50</p>
-        <button onclick="comprarProducto(3)">Comprar</button>
-      </div>
-    </section>
-
-    <section id="formulario-compra" style="display: none;">
-      <h2>Completa tus datos</h2>
-      <p id="producto-seleccionado"></p>
-      <form id="form-compra" onsubmit="return enviarFormulario(event)">
-        <input type="text" name="nombre" placeholder="Nombres Completos" required />
-        <input type="text" name="dni" placeholder="DNI" required />
-        <input type="tel" name="celular" placeholder="Celular" required />
-        <input type="email" name="email" placeholder="Correo Electrónico" required />
-        <input type="text" name="region" placeholder="Región o Departamento" required />
-        <input type="text" name="agencia" placeholder="Agencia (Shalom, Cruz del Sur, Emtrafesa)" required />
-        <input type="number" name="cantidad" placeholder="Cantidad" min="1" value="1" required />
-        <button type="submit">Enviar y Pagar</button>
+  <main class="products">
+    <!-- Producto: Cigarros Lucky Mora -->
+    <div class="product">
+      <img src="https://files.fm/u/agb3sxk4d6" alt="Cigarros Lucky Mora">
+      <h2>2 paquetes de cigarro Lucky Mora</h2>
+      <p>20 unidades en cada cajetilla</p>
+      <span class="price">460 SOLES</span>
+      <form action="formulario.html" method="get">
+        <input type="hidden" name="producto" value="cigarro">
+        <button type="submit">Comprar</button>
       </form>
-    </section>
+    </div>
   </main>
-
-  <script src="script.js"></script>
 </body>
 </html>

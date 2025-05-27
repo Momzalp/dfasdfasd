@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario de Compra</title>
+</head>
+<body>
+  <h2>Formulario de Pedido</h2>
+  <form id="orderForm">
+    <input type="hidden" name="producto" value="cigarro">
+    <label>Nombre completo: <input type="text" name="nombre" required></label><br>
+    <label>DNI: <input type="text" name="dni" required></label><br>
+    <label>Celular: <input type="tel" name="celular" required></label><br>
+    <label>Email: <input type="email" name="email" required></label><br>
+    <label>Departamento y dirección: <input type="text" name="direccion" required></label><br>
+    <label>Agencia de envío:
+      <select name="agencia" required>
+        <option value="Shalom">Shalom</option>
+        <option value="Cruz del Sur">Cruz del Sur</option>
+        <option value="Emtrafesa">Emtrafesa</option>
+      </select>
+    </label><br><br>
+    <button type="submit">Enviar y Pagar</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("orderForm");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const data = new FormData(form);
+      const producto = data.get("producto");
+
+      let pagoLink = "#";
+      if (producto === "cigarro") {
+        pagoLink = "https://mpago.la/2QmnnGu";
+      }
+
+      fetch("https://formspree.io/f/mgvkjbwk", {
+        method: "POST",
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(() => {
+        window.location.href = pagoLink;
+      }).catch((error) => {
+        alert("Hubo un error al enviar el formulario.");
+      });
+    });
+  </script>
+</body>
+</html>
