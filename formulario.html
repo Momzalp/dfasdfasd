@@ -1,17 +1,18 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Formulario de Compra</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <h2>Formulario de Pedido</h2>
   <form id="orderForm">
-    <input type="hidden" name="producto" value="cigarro">
+    <input type="hidden" name="producto" value="">
     <label>Nombre completo: <input type="text" name="nombre" required></label><br>
-    <label>DNI: <input type="text" name="dni" required></label><br>
+    <label>DNI8 Digitos: <input type="text" name="dni" required></label><br>
     <label>Celular: <input type="tel" name="celular" required></label><br>
     <label>Email: <input type="email" name="email" required></label><br>
     <label>Departamento y dirección: <input type="text" name="direccion" required></label><br>
@@ -27,14 +28,23 @@
 
   <script>
     const form = document.getElementById("orderForm");
+    const params = new URLSearchParams(window.location.search);
+    const producto = params.get("producto");
+    form.querySelector("input[name='producto']").value = producto;
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
       const data = new FormData(form);
-      const producto = data.get("producto");
-
       let pagoLink = "#";
-      if (producto === "cigarro") {
+
+      if (producto === "polo") {
+        pagoLink = "https://mpago.la/2gyiYbw";
+      } else if (producto === "polera") {
+        pagoLink = "https://mpago.la/1q6W4md";
+      } else if (producto === "medias") {
+        pagoLink = "https://mpago.la/1ZxSSk3";
+      } else if (producto === "cigarro") {
         pagoLink = "https://mpago.la/2QmnnGu";
       }
 
@@ -46,8 +56,8 @@
         }
       }).then(() => {
         window.location.href = pagoLink;
-      }).catch((error) => {
-        alert("Hubo un error al enviar el formulario.");
+      }).catch(() => {
+        alert("Error al enviar el formulario.");
       });
     });
   </script>
