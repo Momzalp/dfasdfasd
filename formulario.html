@@ -41,87 +41,52 @@
     </form>
   </div>
 
-  <script>
-    const productos = {
-      'polo': { nombre: 'Polo Clásico', precio: 150, pago: 'https://mpago.la/2gyiYbw' },
-      'polera': { nombre: 'Polera', precio: 250, pago: 'https://mpago.la/1q6W4md' },
-      'medias': { nombre: 'Medias (Par)', precio: 50, pago: 'https://mpago.la/1ZxSSk3' },
-      'cigarros': { nombre: '2 Paquetes Cigarro Lucky Mora', precio: 207, pago: 'https://mpago.la/2QmnnGu' }
-    };
+<script>
+  const productos = {
+    'polo': { nombre: 'Polo Clásico', precio: 150, pago: 'https://mpago.la/2gyiYbw' },
+    'polera': { nombre: 'Polera', precio: 250, pago: 'https://mpago.la/1q6W4md' },
+    'medias': { nombre: 'Medias (Par)', precio: 50, pago: 'https://mpago.la/1ZxSSk3' },
+    'cigarros': { nombre: '2 Paquetes Cigarro Lucky Mora', precio: 207, pago: 'https://mpago.la/2QmnnGu' }
+  };
 
-    window.addEventListener('DOMContentLoaded', () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const productoKey = urlParams.get('producto');
+  const urlParams = new URLSearchParams(window.location.search);
+  const productoKey = urlParams.get('producto');
+  const data = productos[productoKey];
 
-      const data = productos[productoKey];
+  if (data) {
+    document.getElementById('producto-nombre').textContent = data.nombre;
+    document.getElementById('producto-precio').textContent = data.precio;
+    document.getElementById('producto-input').value = data.nombre;
+    document.getElementById('precio-input').value = 'S/ ' + data.precio;
+  }
 
-      if (data) {
-        document.getElementById('producto-nombre').textContent = data.nombre;
-        document.getElementById('producto-precio').textContent = data.precio;
-        document.getElementById('producto-input').value = data.nombre;
-        document.getElementById('precio-input').value = 'S/ ' + data.precio;
+  document.querySelector("form").addEventListener("submit", function (e) {
+    e.preventDefault(); // prevenir envío normal
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+      method: form.method,
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+        if (data && data.pago) {
+          window.location.href = data.pago;
+        } else {
+          alert("Formulario enviado con éxito.");
+        }
       } else {
-        document.getElementById('producto-nombre').textContent = 'Producto no encontrado';
-        document.getElementById('producto-precio').textContent = '-';
+        alert("Hubo un problema al enviar el formulario.");
       }
+    }).catch(error => {
+      alert("Error al enviar el formulario.");
     });
+  });
+</script>
 
-    window.addEventListener('DOMContentLoaded', () => {
-      const selectEntrega = document.querySelector('select[name="Tipo de entrega"]');
-      const direccionInput = document.getElementById('direccion');
-      const labelDireccion = direccionInput.previousElementSibling;
-
-      function toggleDireccion() {
-        if (selectEntrega.value === 'Envío a domicilio') {
-          direccionInput.required = true;
-          direccionInput.style.display = 'block';
-          labelDireccion.style.display = 'block';
-        } else {
-          direccionInput.required = false;
-          direccionInput.style.display = 'none';
-          labelDireccion.style.display = 'none';
-          direccionInput.value = '';
-        }
-      }
-
-      selectEntrega.addEventListener('change', toggleDireccion);
-      toggleDireccion();
-    });
-
-    function redirigirPago(event) {
-      event.preventDefault();
-
-      const selectEntrega = event.target.querySelector('select[name="Tipo de entrega"]');
-      const direccion = event.target.querySelector('input[name="Dirección"]').value.trim();
-
-      if (selectEntrega.value === 'Envío a domicilio' && direccion === '') {
-        alert('Por favor ingresa la dirección para envío a domicilio.');
-        return false;
-      }
-
-      fetch(event.target.action, {
-        method: 'POST',
-        body: new FormData(event.target),
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(response => {
-        if (response.ok) {
-          const urlParams = new URLSearchParams(window.location.search);
-          const productoKey = urlParams.get('producto');
-          const data = productos[productoKey];
-          if (data && data.pago) {
-            window.location.href = data.pago;
-          } else {
-            alert('Error: enlace de pago no encontrado.');
-          }
-        } else {
-          alert('Error al enviar el formulario. Por favor intenta de nuevo.');
-        }
-      })
-      .catch(() => alert('Error de conexión. Intenta más tarde.'));
-
-      return false;
-    }
-  </script>
 </body>
 </html>
