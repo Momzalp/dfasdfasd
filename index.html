@@ -1,63 +1,36 @@
+﻿
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tienda de Productos</title>
+  <title>Delivery Moro y Nuevo Moro</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Carrusel de imágenes -->
+  <div class="carrusel-container">
+    <div class="carrusel">
+      <img src="https://i.postimg.cc/6QKYqNf4/Chat-GPT-Image-27-may-2025-12-37-57.png" alt="Imagen 1">
+      <img src="https://i.postimg.cc/qv2QtshG/photo-5017235428180341073-y.jpg" alt="Imagen 2">
+      <img src="https://i.postimg.cc/8zSpDZ0g/Chat-GPT-Image-30-may-2025-11-22-36.png" alt="Imagen 3">
+    </div>
+  </div>
+
   <header>
-    <h1>Tienda de Productos</h1>
+    <h1>Tienda Delivery</h1>
+    <p class="local-only">Solo disponible para Moro y Nuevo Moro</p>
   </header>
-  <main class="products">
-    <!-- Polo -->
-    <div class="product">
-      <img src="https://i.postimg.cc/qv2QtshG/photo-5017235428180341073-y.jpg" alt="Polo Clásico">
-      <h2>Polo Clásico</h2>
-      <p>Polo 100% algodón</p>
-      <span class="price">150 SOLES</span>
-      <form action="formulario.html" method="get">
-        <input type="hidden" name="producto" value="polo">
-        <button type="submit">Comprar</button>
-      </form>
-    </div>
 
-    <!-- Polera -->
-    <div class="product">
-      <img src="https://i.postimg.cc/dtFgRTVz/polera.jpg" alt="Polera">
-      <h2>Polera</h2>
-      <p>Polera de invierno, algodón grueso</p>
-      <span class="price">250 SOLES</span>
-      <form action="formulario.html" method="get">
-        <input type="hidden" name="producto" value="polera">
-        <button type="submit">Comprar</button>
-      </form>
+  <section class="categorias">
+    <h2><a href="formulario.html?producto=cigarros" class="categoria-link">Categoría: Cigarros</a></h2>
+    <div class="producto">
+      <img src="https://i.postimg.cc/8zSpDZ0g/Chat-GPT-Image-30-may-2025-11-22-36.png" alt="2 Paquetes de Cigarro Lucky Mora" />
+      <h3>2 Paquetes de Cigarro Lucky Mora</h3>
+      <p>Contiene 20 unidades por cajetilla.</p>
+      <p class="precio">Precio Oferta: S/ 207</p>
+      <a href="formulario.html?producto=cigarros" class="btn">Comprar</a>
     </div>
-
-    <!-- Medias -->
-    <div class="product">
-      <img src="https://i.postimg.cc/SK2JrQXq/medias.jpg" alt="Medias">
-      <h2>Medias</h2>
-      <p>Par de medias deportivas</p>
-      <span class="price">50 SOLES</span>
-      <form action="formulario.html" method="get">
-        <input type="hidden" name="producto" value="medias">
-        <button type="submit">Comprar</button>
-      </form>
-    </div>
-
-    <!-- Cigarros -->
-    <div class="product">
-      <img src="https://i.postimg.cc/6QKYqNf4/Chat-GPT-Image-27-may-2025-12-37-57.png" alt="Cigarros Lucky Mora">
-      <h2>2 paquetes de cigarro Lucky Mora</h2>
-      <p>20 unidades en cada cajetilla</p>
-      <span class="price">460 SOLES</span>
-      <form action="formulario.html" method="get">
-        <input type="hidden" name="producto" value="cigarro">
-        <button type="submit">Comprar</button>
-      </form>
-    </div>
-  </main>
+  </section>
 </body>
 </html>

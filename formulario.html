@@ -1,64 +1,127 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Formulario de Compra</title>
+  <title>Formulario de Pedido</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h2>Formulario de Pedido</h2>
-  <form id="orderForm">
-    <input type="hidden" name="producto" value="">
-    <label>Nombre completo: <input type="text" name="nombre" required></label><br>
-    <label>DNI: <input type="text" name="dni" required></label><br>
-    <label>Celular: <input type="tel" name="celular" required></label><br>
-    <label>Email: <input type="email" name="email" required></label><br>
-    <label>Departamento y dirección: <input type="text" name="direccion" required></label><br>
-    <label>Agencia de envío:
-      <select name="agencia" required>
-        <option value="Shalom">Shalom</option>
-        <option value="Cruz del Sur">Cruz del Sur</option>
-        <option value="Emtrafesa">Emtrafesa</option>
+  <div id="formulario-compra">
+    <h2>Finaliza tu Pedido</h2>
+    <form action="https://formspree.io/f/mgvkjbwk" method="POST" onsubmit="return redirigirPago(event)">
+      <input type="hidden" name="Producto" id="producto-input" />
+      <input type="hidden" name="Precio" id="precio-input" />
+
+      <p><strong>Producto:</strong> <span id="producto-nombre">Cargando...</span></p>
+      <p><strong>Precio:</strong> S/ <span id="producto-precio">-</span></p>
+
+      <label>Tipo de entrega:</label>
+      <select name="Tipo de entrega" required>
+        <option value="Envío a domicilio">Envío a domicilio</option>
+        <option value="Recojo en tienda">Recojo en tienda</option>
       </select>
-    </label><br><br>
-    <button type="submit">Enviar y Pagar</button>
-  </form>
+
+      <label for="direccion">Dirección completa (si es domicilio):</label>
+      <input type="text" id="direccion" name="Dirección" placeholder="Av. Ejemplo 123, Moro" />
+
+      <label for="nombre">Nombre completo:</label>
+      <input type="text" id="nombre" name="Nombre" required />
+
+      <label for="dni">DNI:</label>
+      <input type="number" id="dni" name="DNI" required />
+
+      <label for="celular">Celular (WhatsApp):</label>
+      <input type="tel" id="celular" name="Celular" required />
+
+      <label for="correo">Correo electrónico:</label>
+      <input type="email" id="correo" name="Correo" required />
+
+      <button type="submit">Enviar y Pagar</button>
+    </form>
+  </div>
 
   <script>
-    const form = document.getElementById("orderForm");
-    const params = new URLSearchParams(window.location.search);
-    const producto = params.get("producto");
-    form.querySelector("input[name='producto']").value = producto;
+    const productos = {
+      'polo': { nombre: 'Polo Clásico', precio: 150, pago: 'https://mpago.la/2gyiYbw' },
+      'polera': { nombre: 'Polera', precio: 250, pago: 'https://mpago.la/1q6W4md' },
+      'medias': { nombre: 'Medias (Par)', precio: 50, pago: 'https://mpago.la/1ZxSSk3' },
+      'cigarros': { nombre: '2 Paquetes Cigarro Lucky Mora', precio: 207, pago: 'https://mpago.la/2QmnnGu' }
+    };
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productoKey = urlParams.get('producto');
 
-      const data = new FormData(form);
-      let pagoLink = "#";
+      const data = productos[productoKey];
 
-      if (producto === "polo") {
-        pagoLink = "https://mpago.la/2gyiYbw";
-      } else if (producto === "polera") {
-        pagoLink = "https://mpago.la/1q6W4md";
-      } else if (producto === "medias") {
-        pagoLink = "https://mpago.la/1ZxSSk3";
-      } else if (producto === "cigarro") {
-        pagoLink = "https://mpago.la/2QmnnGu";
+      if (data) {
+        document.getElementById('producto-nombre').textContent = data.nombre;
+        document.getElementById('producto-precio').textContent = data.precio;
+        document.getElementById('producto-input').value = data.nombre;
+        document.getElementById('precio-input').value = 'S/ ' + data.precio;
+      } else {
+        document.getElementById('producto-nombre').textContent = 'Producto no encontrado';
+        document.getElementById('producto-precio').textContent = '-';
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const selectEntrega = document.querySelector('select[name="Tipo de entrega"]');
+      const direccionInput = document.getElementById('direccion');
+      const labelDireccion = direccionInput.previousElementSibling;
+
+      function toggleDireccion() {
+        if (selectEntrega.value === 'Envío a domicilio') {
+          direccionInput.required = true;
+          direccionInput.style.display = 'block';
+          labelDireccion.style.display = 'block';
+        } else {
+          direccionInput.required = false;
+          direccionInput.style.display = 'none';
+          labelDireccion.style.display = 'none';
+          direccionInput.value = '';
+        }
       }
 
-      fetch("https://formspree.io/f/mgvkjbwk", {
-        method: "POST",
-        body: data,
-        headers: {
-          'Accept': 'application/json'
-        }
-      }).then(() => {
-        window.location.href = pagoLink;
-      }).catch(() => {
-        alert("Error al enviar el formulario.");
-      });
+      selectEntrega.addEventListener('change', toggleDireccion);
+      toggleDireccion();
     });
+
+    function redirigirPago(event) {
+      event.preventDefault();
+
+      const selectEntrega = event.target.querySelector('select[name="Tipo de entrega"]');
+      const direccion = event.target.querySelector('input[name="Dirección"]').value.trim();
+
+      if (selectEntrega.value === 'Envío a domicilio' && direccion === '') {
+        alert('Por favor ingresa la dirección para envío a domicilio.');
+        return false;
+      }
+
+      fetch(event.target.action, {
+        method: 'POST',
+        body: new FormData(event.target),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(response => {
+        if (response.ok) {
+          const urlParams = new URLSearchParams(window.location.search);
+          const productoKey = urlParams.get('producto');
+          const data = productos[productoKey];
+          if (data && data.pago) {
+            window.location.href = data.pago;
+          } else {
+            alert('Error: enlace de pago no encontrado.');
+          }
+        } else {
+          alert('Error al enviar el formulario. Por favor intenta de nuevo.');
+        }
+      })
+      .catch(() => alert('Error de conexión. Intenta más tarde.'));
+
+      return false;
+    }
   </script>
 </body>
 </html>

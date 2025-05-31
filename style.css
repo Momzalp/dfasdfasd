@@ -1,75 +1,158 @@
+﻿
+/* Estilos básicos para que se vea limpio y profesional */ 
+
 body {
-  font-family: sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #f8f8f8;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f9f9f9;
+  color: #333;
 }
 
 header {
-  background-color: #333;
-  color: white;
-  padding: 1rem;
   text-align: center;
+  margin-bottom: 40px;
 }
 
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
+h1 {
+  color: #2c3e50;
 }
 
-.product {
-  background-color: white;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+#productos {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.producto {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 250px;
+  padding: 15px;
   text-align: center;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
 }
 
-.product img {
+.producto img {
   width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
-.product h2 {
-  margin: 0.5rem 0;
-  font-size: 1.2rem;
+.producto h3 {
+  margin: 15px 0 10px 0;
 }
 
-.product .price {
-  color: green;
-  font-weight: bold;
-  margin: 0.5rem 0;
+.producto p {
+  font-size: 1.2em;
+  color: #27ae60;
+  margin-bottom: 15px;
 }
 
-.product button {
-  padding: 0.5rem 1rem;
-  border: none;
-  background-color: #0077cc;
+.producto button, 
+.producto .btn {
+  background-color: #2980b9;
   color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1em;
   border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
 }
 
-.product button:hover {
-  background-color: #005fa3;
+.producto button:hover, 
+.producto .btn:hover {
+  background-color: #3498db;
 }
 
-form {
-  padding: 1rem;
+#formulario-compra {
   max-width: 500px;
-  margin: auto;
-  background: white;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#formulario-compra h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+#formulario-compra p {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+#formulario-compra form label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+button[type="submit"] {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 14px 25px;
+  font-size: 1.1em;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  font-weight: bold;
+}
+
+button[type="submit"]:hover {
+  background-color: #2ecc71;
+}
+
+/* Carrusel de imágenes */
+.carrusel-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px;
   border-radius: 10px;
 }
 
-form input, form select {
+.carrusel {
+  display: flex;
+  width: 300%;
+  animation: deslizar 12s infinite;
+}
+
+.carrusel img {
   width: 100%;
-  padding: 0.5rem;
-  margin: 0.3rem 0;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  flex-shrink: 0;
+  object-fit: cover;
+  max-height: 300px;
+  border-radius: 10px;
+}
+
+@keyframes deslizar {
+  0% { transform: translateX(0); }
+  33% { transform: translateX(-100%); }
+  66% { transform: translateX(-200%); }
+  100% { transform: translateX(0); }
 }
