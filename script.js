@@ -1,62 +1,45 @@
-const productos = {
-  1: {
-    nombre: "Polo Clásico",
-    precio: 150,
-    linkMP: "https://mpago.la/2gyiYbw"
-  },
-  2: {
-    nombre: "Polera Premium",
-    precio: 250,
-    linkMP: "https://mpago.la/1q6W4md"
-  },
-  3: {
-    nombre: "Par de Medias",
-    precio: 50,
-    linkMP: "https://mpago.la/1ZxSSk3"
-  }
-};
+﻿document.addEventListener('DOMContentLoaded', () => {
+  const form = document.querySelector("form");
+  const formularioCompra = document.getElementById('formulario-compra');
+  const pasarelaSimulada = document.getElementById('pasarela-simulada');
+  const pagoStatus = document.querySelector('.status-info');
 
-let productoSeleccionadoId = null;
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault(); 
+      
+      const formData = new FormData(form);
+      console.log("Datos del formulario a enviar:", Object.fromEntries(formData.entries()));
 
-function comprarProducto(id) {
-  productoSeleccionadoId = id;
-
-  const producto = productos[id];
-  document.getElementById("producto-seleccionado").textContent = 
-    `Producto: ${producto.nombre} - Precio unitario: S/ ${producto.precio}`;
-
-  document.getElementById("productos").style.display = "none";
-  document.getElementById("formulario-compra").style.display = "block";
-}
-
-async function enviarFormulario(event) {
-  event.preventDefault();
-
-  const form = event.target;
-  const formData = new FormData(form);
-  const producto = productos[productoSeleccionadoId];
-
-  formData.append("Producto", producto.nombre);
-  formData.append("Precio", producto.precio);
-  formData.append("Cantidad", form.cantidad.value);
-
-  try {
-    const response = await fetch("https://formspree.io/f/mgvkjbwk", {
-      method: "POST",
-      headers: { 'Accept': 'application/json' },
-      body: formData
+      // Añade una pequeña animación antes de ocultar el formulario
+      formularioCompra.style.opacity = '0';
+      setTimeout(() => {
+        formularioCompra.classList.add('oculto');
+        pasarelaSimulada.classList.remove('oculto');
+        pasarelaSimulada.style.opacity = '1';
+      }, 300); // Coincide con la duración de la transición CSS
     });
-
-    if (response.ok) {
-      alert("Formulario enviado correctamente. Redirigiendo al pago...");
-      window.location.href = producto.linkMP;
-    } else {
-      alert("Hubo un problema al enviar el formulario. Intenta nuevamente.");
-    }
-  } catch (error) {
-    alert("Error de conexión. Inténtalo más tarde.");
-    console.error(error);
   }
 
-  return false;
-}
+  window.simularPago = (estado) => {
+    pagoStatus.textContent = `Procesando pago...`;
+    
+    setTimeout(() => {
+      if (estado === 'exitoso') {
+        pagoStatus.textContent = '¡Pago exitoso! Redirigiendo...';
+        alert('¡Tu pago ha sido procesado con éxito!');
+      } else {
+        pagoStatus.textContent = 'Pago fallido. Inténtalo de nuevo.';
+        alert('Hubo un problema con el pago. Por favor, inténtalo de nuevo.');
+        
+        // Vuelve a mostrar el formulario con una transición
+        pasarelaSimulada.style.opacity = '0';
+        setTimeout(() => {
+          pasarelaSimulada.classList.add('oculto');
+          formularioCompra.classList.remove('oculto');
+          formularioCompra.style.opacity = '1';
+        }, 300);
+      }
+    }, 2000);
+  };
+});
